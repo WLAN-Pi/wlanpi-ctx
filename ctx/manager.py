@@ -185,7 +185,9 @@ def start(args: argparse.Namespace):
     txdata = mp.Process(
         name="txdata",
         target=TxData,
-        args=(config,), # What this looks like with one element because this param needs to be a tuple: args=(config,),
+        args=(
+            config,
+        ),  # What this looks like with one element because this param needs to be a tuple: args=(config,),
     )
     running_processes.append(txdata)
     txdata.start()

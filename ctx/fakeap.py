@@ -21,15 +21,16 @@ import random
 import signal
 import sys
 from time import sleep
-from typing import Dict
 
 # suppress scapy warnings
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
 # third party imports
 try:
+    from scapy.all import LLC, SNAP, Dot11, Dot11QoS, RadioTap, Raw, Scapy_Exception
+    from scapy.all import conf as scapyconf  # type: ignore
+    from scapy.all import get_if_hwaddr
     from scapy.arch.unix import get_if_raw_hwaddr
-    from scapy.all import RadioTap, Dot11, Dot11QoS, LLC, SNAP, Raw, Scapy_Exception, conf as scapyconf, get_if_hwaddr  # type: ignore
 except ModuleNotFoundError as error:
     if error.name == "scapy":
         print("required module scapy not found.")
@@ -41,16 +42,19 @@ DOT11_TYPE_DATA = 2
 DOT11_SUBTYPE_DATA = 0x00
 DOT11_SUBTYPE_QOS_DATA = 0x08
 
+
 class TxData(multiprocessing.Process):
     """Handle Tx of fake AP frames"""
-    
+
     def __init__(self, config):
         super(TxData, self).__init__()
         self.log = logging.getLogger(inspect.stack()[0][1].split("/")[-1])
         self.log.debug("ctx pid: %s; parent pid: %s", os.getpid(), os.getppid())
         self.log.debug("config passed to ctx: %s", config)
         if not isinstance(config, dict):
-            raise ValueError("configuration received in the TxData process is not a dictionary")
+            raise ValueError(
+                "configuration received in the TxData process is not a dictionary"
+            )
         self.config = config
         self.interface: "str" = config.get("GENERAL").get("interface")
 
@@ -102,7 +106,7 @@ class TxData(multiprocessing.Process):
             addr2=self.mac,
             addr3=self.mac,
         )
-        
+
         self.data_frame = RadioTap() / dot11 / Dot11QoS() / LLC() / SNAP()
 
         self.log.info("starting QoS data frame transmissions")
@@ -120,7 +124,7 @@ class TxData(multiprocessing.Process):
         """Generate random payload data."""
         length = random.randint(min, max)
         return os.urandom(length)
-    
+
     def every(self, interval, task) -> None:
         """Attempt to address beacon drift"""
         while True:
@@ -129,7 +133,9 @@ class TxData(multiprocessing.Process):
 
     def tx_data(self) -> None:
         """Update and Tx QoS Data Frame"""
-        payload = self.generate_random_data(min=self.tx_payload_min, max=self.tx_payload_max)
+        payload = self.generate_random_data(
+            min=self.tx_payload_min, max=self.tx_payload_max
+        )
         data_frame = self.data_frame / Raw(load=payload)
         try:
             self.l2socket.send(data_frame)  # type: ignore

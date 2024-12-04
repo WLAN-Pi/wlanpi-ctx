@@ -23,6 +23,7 @@ from typing import Dict, List
 from .constants import _20MHZ_FREQUENCY_CHANNEL_MAP
 from .helpers import run_command
 
+
 def flag_last_object(seq):
     """Treat the last object in an iterable differently"""
     seq = iter(seq)  # ensure seq is an iterator
@@ -31,6 +32,7 @@ def flag_last_object(seq):
         yield _a, False
         _a = _b
     yield _a, True
+
 
 class InterfaceError(Exception):
     """Custom exception used when there are problems staging the interface for injection"""

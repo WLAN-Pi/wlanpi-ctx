@@ -28,7 +28,6 @@ from base64 import b64encode
 from dataclasses import dataclass
 from typing import Any, Dict
 
-
 __tools = [
     "tcpdump",
     "iw",
@@ -88,6 +87,7 @@ def channel(value: str) -> int:
         return ch
     raise argparse.ArgumentTypeError(f"{ch} is not a valid channel")
 
+
 def interval(value: str) -> float:
     """Check if the given string can be converted to a float."""
     interval = float(value)
@@ -96,12 +96,14 @@ def interval(value: str) -> float:
     except ValueError:
         raise argparse.ArgumentTypeError(f"{interval} is not a valid interval")
 
+
 def payload_size(value: str) -> int:
     """Check if the value is an integer and between 1 and 4096."""
     size = int(value)
     if isinstance(size, int) and 1 <= size <= 4096:
         return int(size)
     raise argparse.ArgumentTypeError(f"{size} is not an integer between 1 and 4096")
+
 
 def frequency(freq: str) -> int:
     """Check if the provided frequency is valid"""
@@ -117,7 +119,9 @@ def frequency(freq: str) -> int:
         if band[0] <= freq <= band[1]:
             return freq
 
-    raise argparse.ArgumentTypeError(f"{freq} not found in these frequency ranges: {freq_ranges}")
+    raise argparse.ArgumentTypeError(
+        f"{freq} not found in these frequency ranges: {freq_ranges}"
+    )
 
 
 def setup_parser() -> argparse.ArgumentParser:
@@ -269,13 +273,13 @@ def setup_config(args):
 
     if "interface" not in config["GENERAL"]:
         config["GENERAL"]["interface"] = "wlan0"
-        
+
     if "tx_interval" not in config["GENERAL"]:
         config["GENERAL"]["tx_interval"] = 0.001
-        
+
     if "tx_payload_max" not in config["GENERAL"]:
         config["GENERAL"]["tx_payload_max"] = 512
-        
+
     if "tx_payload_min" not in config["GENERAL"]:
         config["GENERAL"]["tx_payload_min"] = 64
 
@@ -373,7 +377,7 @@ def validate(config) -> bool:
         if freq:
             log.debug("validating config for freq...")
             frequency(freq)
-            
+
         intv = config.get("GENERAL").get("tx_interval")
         if intv:
             log.debug("validating config for tx_interval...")
@@ -383,12 +387,12 @@ def validate(config) -> bool:
         if tx_payload_max:
             log.debug("validating config for tx_payload_max...")
             payload_size(tx_payload_max)
-            
+
         tx_payload_min = config.get("GENERAL").get("tx_payload_min")
         if tx_payload_min:
             log.debug("validating config for tx_payload_min...")
             payload_size(tx_payload_min)
-            
+
     except ValueError:
         log.error("%s", sys.exc_info())
         sys.exit(signal.SIGABRT)
@@ -447,6 +451,7 @@ def get_frequency_bytes(channel: int) -> bytes:
 
 class Base64Encoder(json.JSONEncoder):
     """A Base64 encoder for JSON"""
+
     # example usage: json.dumps(bytes(frame), cls=Base64Encoder)
 
     # pylint: disable=method-hidden
