@@ -22,7 +22,6 @@ import os
 import platform
 import signal
 import sys
-from datetime import datetime
 from time import sleep
 
 # third party imports
