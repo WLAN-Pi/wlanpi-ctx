@@ -1,16 +1,17 @@
 ![versions](docs/images/ctx-pybadge-w-logo.svg) ![coverage-badge](coverage.svg) [![packagecloud-badge](https://img.shields.io/badge/deb-packagecloud.io-844fec.svg)](https://packagecloud.io/)
+<!-- ![versions](docs/images/ctx-pybadge-w-logo.svg) ![coverage-badge](coverage.svg) [![packagecloud-badge](https://img.shields.io/badge/deb-packagecloud.io-844fec.svg)](https://packagecloud.io/) -->
 
 # wlanpi-ctx
 
-ctx is a Wi-Fi continuous transmitter testing tool built for the [WLAN Pi](https://github.com/WLAN-Pi/).
+wlanpi-`ctx` is a continuous transmitter testing tool built for the [WLAN Pi](https://github.com/WLAN-Pi/).
 
-## Why?
+## Why
 
 Just for continuously transmitting random data.
 
 ## Installation
 
-ctx is not yet included in the [WLAN Pi](https://github.com/WLAN-Pi/) image as a Debian package, but if you want to install it manually, here is what you need:
+`ctx` is not yet included in the [WLAN Pi](https://github.com/WLAN-Pi/) image as a Debian package, but if you want to install it manually, here is what you need:
 
 General requirements:
 
@@ -24,21 +25,13 @@ Package requirements:
 - Python version 3.9 or higher
 - `iw`, `iproute2`, `pciutils`, `usbutils`, `kmod`, `wpa_cli`, and `wpasupplicant` tools installed on the host. most distributions already come with these.
 
-### Upgrading WLAN Pi OS v3 (C4, M4, Pro) installs.
+### WLAN Pi Go
 
-Got your hands on a WLAN Pi C4, M4, or Pro? We build and deploy a Debian package for `wlanpi-ctx` to our package archive. Get the latest version by running `sudo apt update` and `sudo apt install wlanpi-ctx`.
-
-### Upgrading existing WLAN Pi OS v2 (NEO2) installs via pipx:
-
-Are you reading this and have a NEO2 WLAN Pi? You can upgrade your existing ctx install, but there are some manual things you need to do first. Check out the [upgrading with pipx](UPGRADING_WITH_PIPX.md) instructions.
-
-### Don't have a WLAN Pi? Installing via pipx:
-
-Don't have a WLAN Pi? Have a Linux host handy? Try the [installing wlanpi-ctx using pipx](INSTALLING_WITH_PIPX.md) instructions.
+[Some quick instructions for installing on early WLAN Pi Go images that do not have wlanpi-ctx installed](GO_INSTALLATION.md).
 
 # Usage from the CLI
 
-You can start ctx directly from the command line like this:
+You can start `ctx` directly from the command line like this:
 
 ```
 sudo ctx
@@ -72,7 +65,7 @@ optional arguments:
 
 ## Usage Examples
 
-We require elevated permissions to put the interface in monitor mode and to open raw native sockets for frame injection. Starting and stopping ctx from the WLAN Pi's Front Panel Menu System (FPMS) will handle this for you automatically. Otherwise, when run from CLI elevated permissions are required:
+`ctx` requires elevated permissions to put the interface in monitor mode and to open raw native sockets for frame injection. Starting and stopping `ctx` from the WLAN Pi's Front Panel Menu System (FPMS) will handle this for you automatically. Otherwise, when run from CLI elevated permissions are required:
 
 ```
 # Default parameters listed in start up message
@@ -103,7 +96,7 @@ $ sudo ctx --tx_payload_min 128 --tx_payload_max 128 --tx_interval 0.1
 2024-12-03 21:50:47,661 [WARNING] setup_config: can not find config at /etc/wlanpi-ctx/config.ini
 
 #/~>
-Starting a fake AP using wlan0mon (a0:02:a5:ce:78:ef) on channel 36 (5180)
+Starting a fake AP using wlan0mon (a0:02:a5:xx:xx:xx) on channel 36 (5180)
  - Transmitting QoS Data frames to 02:00:00:31:41:59 every 0.1 seconds
  - Payload is os.urandom(length) where length is a random integer between 128 and 128
 #/~>
@@ -120,7 +113,7 @@ $ sudo ctx --debug
 
 ## Feature: overriding defaults with configuration file support
 
-To change the default operation of the script (without passing in CLI args), on the WLAN Pi, a configuration file can be found at `/etc/wlanpi-ctx/config.ini`. 
+To change the default operation of the script (without passing in any of the CLI args mentioned above), a configuration file can be found at `/etc/wlanpi-ctx/config.ini`.
 
 This can be used as a way to modify settings loaded at runtime such as channel, interface, and payload min/max values. 
 
@@ -130,4 +123,4 @@ Want to contribute? Thanks! Please take a few moments to [read this](CONTRIBUTIN
 
 # Discussions and Issues
 
-Please use GitHub discussions for dialogue around features and ideas that do not exist. Create issues for problems found running ctx.
+Please use GitHub discussions for dialogue around features and ideas that do not exist. Create issues for problems found running `ctx`.
