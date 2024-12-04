@@ -1,0 +1,13 @@
+# wlanpi-ctx.service
+
+[Unit]
+Description=a continuous random data frame transmitter"
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/sbin/ctx
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes

@@ -1,0 +1,11 @@
+black
+isort
+autoflake
+mypy
+flake8
+pytest
+pytest-cov
+pytest-mock
+tox
+coverage-badge
+toml-sort

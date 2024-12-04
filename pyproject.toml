@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctx"
+description = "ctx is a program that will put a WLAN adapter in continuous Tx mode"
+readme = "README.md"
+license = {text = "BSD-3-Clause"}
+authors = [
+  {name = "Josh Schmelzle", email = "josh@joshschmelzle.com"}
+]
+requires-python = ">=3.9"
+classifiers = [
+  "Natural Language :: English",
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.9",
+  "Intended Audience :: System Administrators",
+  "Topic :: Utilities"
+]
+dependencies = ["scapy==2.6.1"]
+dynamic = ["version"]
+
+[project.scripts]
+ctx = "ctx.__main__:main"
+
+[project.urls]
+Documentation = "https://docs.wlanpi.com"
+Source = "https://github.com/wlan-pi/ctx"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = 'black'
+
+[tool.setuptools.dynamic]
+version = {attr = "ctx.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
