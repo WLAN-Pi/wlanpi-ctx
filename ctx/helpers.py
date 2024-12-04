@@ -158,7 +158,7 @@ def setup_parser() -> argparse.ArgumentParser:
         type=interval,
         metavar="INTERVAL",
         default="0.001",
-        help="customize the Tx interval for QoS data frames (default: %(default)s)",
+        help="customize the Tx interval for QoS data frames (default: %(default) seconds)",
     )
     parser.add_argument(
         "--tx_payload_max",
@@ -469,7 +469,7 @@ def generate_run_message(config: Dict) -> None:
         f"Starting a fake AP using {interface} ({config['GENERAL']['mac']}) on channel {config['GENERAL']['channel']} ({config['GENERAL']['frequency']})"
     )
     print(
-        f" - Transmitting QoS Data frames to 02:00:00:31:41:59 every {config['GENERAL']['tx_interval']}"
+        f" - Transmitting QoS Data frames to 02:00:00:31:41:59 every {config['GENERAL']['tx_interval']} seconds"
     )
     print(
         f" - Payload is os.urandom(length) where length is a random integer between {config['GENERAL']['tx_payload_min']} and {config['GENERAL']['tx_payload_max']}"

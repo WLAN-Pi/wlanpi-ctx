@@ -82,7 +82,7 @@ $ sudo ctx
 
 #/~>
 Starting a fake AP using wlan0mon (a0:02:a5:xx:xx:xx) on channel 36 (5180)
- - Transmitting QoS Data frames to 02:00:00:31:41:59 every 0.001
+ - Transmitting QoS Data frames to 02:00:00:31:41:59 every 0.001 seconds
  - Payload is os.urandom(length) where length is a random integer between 64 and 512
 #/~>
 
@@ -104,7 +104,7 @@ $ sudo ctx --tx_payload_min 128 --tx_payload_max 128 --tx_interval 0.1
 
 #/~>
 Starting a fake AP using wlan0mon (a0:02:a5:ce:78:ef) on channel 36 (5180)
- - Transmitting QoS Data frames to 02:00:00:31:41:59 every 0.1
+ - Transmitting QoS Data frames to 02:00:00:31:41:59 every 0.1 seconds
  - Payload is os.urandom(length) where length is a random integer between 128 and 128
 #/~>
 

@@ -137,7 +137,7 @@ class TxData(multiprocessing.Process):
             for event in ("Network is down", "No such device"):
                 if event in error.strerror:
                     self.log.warning(
-                        "beacon(): network is down or no such device (%s) ... exiting ...",
+                        "tx_data(): network is down or no such device (%s) ... \ninterface may have disappeared ... check dmesg... \nexiting ...",
                         self.interface,
                     )
                     sys.exit(signal.SIGALRM)

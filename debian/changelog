@@ -1,6 +1,12 @@
+wlanpi-ctx (1.0.1) unstable; urgency=medium
+
+  * Improve log messages 
+
+ -- Josh Schmelzle <josh@joshschmelzle.com>  Wed, 04 Dec 2024 00:20:14 -0500
+
 wlanpi-ctx (1.0.0) unstable; urgency=low
 
   * Initial release
 
- -- Josh Schmelzle <josh@joshschmelzle.com>  Tue, 03 Dec 2024 20:00:00 +0500
+ -- Josh Schmelzle <josh@joshschmelzle.com>  Tue, 03 Dec 2024 20:00:00 -0500
 
