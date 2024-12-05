@@ -7,4 +7,4 @@
 
 """ a Wi-Fi client capability ctx for the WLAN Pi. """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"

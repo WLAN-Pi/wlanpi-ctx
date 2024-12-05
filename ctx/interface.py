@@ -108,6 +108,22 @@ class Interface:
                     )
                 else:
                     self.log.debug("new %s will map to phy%s", self.mon, self.phy_id)
+
+                virtual_interfaces_map = self.detect_virtual_interfaces(self.phy)
+
+                for mac, interfaces in virtual_interfaces_map.items():
+                    if len(interfaces) >= 2:
+                        monitor_mode_present = False
+                        for iface, iface_type in interfaces:
+                            if iface_type == "monitor":
+                                monitor_mode_present = True
+
+                        if monitor_mode_present:
+                            raise InterfaceError(
+                                f"WARNING: One or more virtual interfaces on {self.phy} (MAC: {mac}) are in monitor mode. "
+                                "This may cause conflicts or unintended behavior. Use `iw dev` to check."
+                            )
+
                 self.requires_vif = True
         if not self.channel:
             raise InterfaceError("unknown channel setting for %s", self.name)
@@ -125,6 +141,44 @@ class Interface:
         self.operstate = self.get_operstate()
         self.checks()
         self.log_debug()
+
+    def get_interfaces_for_phy(self, phy: str):
+        """Get all interfaces associated with a given phy"""
+        net_dir = f"/sys/class/ieee80211/{phy}/device/net/"
+        if not os.path.exists(net_dir):
+            raise ValueError(f"{phy} does not exist or is not valid.")
+        return os.listdir(net_dir)
+
+    def get_interface_type(self, interface: str):
+        """Get the type of a given interface (e.g., managed, monitor)"""
+        type_path = f"/sys/class/net/{interface}/type"
+        if not os.path.exists(type_path):
+            return "unknown"
+        with open(type_path, "r") as f:
+            interface_type = int(f.read().strip())
+            if interface_type == 1:
+                return "managed"
+            elif interface_type in (801, 802):
+                return "monitor"
+            return "other"
+
+    def detect_virtual_interfaces(self, phy: str):
+        """Detect and group virtual interfaces for a given phy"""
+        interfaces = self.get_interfaces_for_phy(phy)
+        mac_address_map = {}
+
+        for iface in interfaces:
+            addr_path = f"/sys/class/net/{iface}/address"
+            with open(addr_path, "r") as f:
+                mac = f.read().strip()
+
+            iface_type = self.get_interface_type(iface)
+
+            if mac not in mac_address_map:
+                mac_address_map[mac] = []
+            mac_address_map[mac].append((iface, iface_type))
+
+        return mac_address_map
 
     @staticmethod
     def get_attr_max_len(searchList, attr):
