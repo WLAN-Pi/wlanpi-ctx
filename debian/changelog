@@ -1,9 +1,9 @@
-wlanpi-ctx (1.0.2) unstable; urgency=medium
+wlanpi-ctx (1.0.2-1) unstable; urgency=medium
 
   * Detect and warn when there are multiple virtual interfaces on target
     physical interface for Tx.
 
- -- Josh Schmelzle <josh@joshschmelzle.com>  Wed, 04 Dec 2024 23:06:45 -0500
+ -- Josh Schmelzle <josh@joshschmelzle.com>  Wed, 04 Dec 2024 23:55:51 -0500
 
 wlanpi-ctx (1.0.1) unstable; urgency=medium
 

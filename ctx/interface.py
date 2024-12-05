@@ -110,7 +110,7 @@ class Interface:
                     self.log.debug("new %s will map to phy%s", self.mon, self.phy_id)
 
                 virtual_interfaces_map = self.detect_virtual_interfaces(self.phy)
-
+                self.log.debug("virtual_interfaces_map %s", virtual_interfaces_map)
                 for mac, interfaces in virtual_interfaces_map.items():
                     if len(interfaces) >= 2:
                         monitor_mode_present = False
@@ -119,9 +119,10 @@ class Interface:
                                 monitor_mode_present = True
 
                         if monitor_mode_present:
-                            raise InterfaceError(
-                                f"WARNING: One or more virtual interfaces on {self.phy} (MAC: {mac}) are in monitor mode. "
-                                "This may cause conflicts or unintended behavior. Use `iw dev` to check."
+                            self.log.warning(
+                                f"One or more virtual interfaces assigned to {self.phy} (MAC address: {mac}) are in monitor mode."
+                                f" {virtual_interfaces_map}. "
+                                f"This may cause conflicts or unintended behavior."
                             )
 
                 self.requires_vif = True
@@ -158,7 +159,7 @@ class Interface:
             interface_type = int(f.read().strip())
             if interface_type == 1:
                 return "managed"
-            elif interface_type in (801, 802):
+            elif interface_type in (801, 802, 803):
                 return "monitor"
             return "other"
 
