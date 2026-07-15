@@ -1,3 +1,11 @@
+wlanpi-ctx (1.0.2-2) unstable; urgency=medium
+
+  * Drop python3-distutils from Build-Depends and Pre-Depends. It was removed
+    in Debian trixie (distutils is gone from Python 3.12+); python3-setuptools
+    and the venv-bundled setuptools provide it. Unblocks the trixie build.
+
+ -- Josh Schmelzle <josh@joshschmelzle.com>  Wed, 15 Jul 2026 03:36:42 -0400
+
 wlanpi-ctx (1.0.2-1) unstable; urgency=medium
 
   * Detect and warn when there are multiple virtual interfaces on target
