@@ -5,6 +5,6 @@
 # License : BSD-3-Clause
 # Maintainer : josh@joshschmelzle.com
 
-""" a Wi-Fi client capability ctx for the WLAN Pi. """
+"""a Wi-Fi client capability ctx for the WLAN Pi."""
 
 __version__ = "1.0.2.post1"
