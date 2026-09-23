@@ -11,3 +11,10 @@ updates:
       interval: "weekly"
     allow:
       - dependency-name: "scapy"
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
