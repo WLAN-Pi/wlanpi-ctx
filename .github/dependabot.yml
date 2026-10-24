@@ -17,6 +17,7 @@ updates:
       - dependency-name: "scapy"
     registries:
       - piwheels
+    insecure-external-code-execution: allow
   - package-ecosystem: github-actions
     directory: /
     schedule:
