@@ -4,6 +4,10 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+registries:
+  piwheels:
+    type: python-index
+    url: https://www.piwheels.org/simple
 updates:
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/" # Location of package manifests
@@ -11,6 +15,8 @@ updates:
       interval: "weekly"
     allow:
       - dependency-name: "scapy"
+    registries:
+      - piwheels
   - package-ecosystem: github-actions
     directory: /
     schedule:
