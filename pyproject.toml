@@ -18,7 +18,7 @@ classifiers = [
   "Intended Audience :: System Administrators",
   "Topic :: Utilities"
 ]
-dependencies = ["scapy==2.6.1"]
+dependencies = ["scapy==2.7.0"]
 dynamic = ["version"]
 
 [project.scripts]
