@@ -22,7 +22,7 @@ jobs:
       pkg: wlanpi-ctx
       version: ${{ needs.format.outputs.version }} 
   slack-workflow-status:
-    if: ${{ always() && (! github.event.pull_request.head.repo.fork) }}
+    if: ${{ always() && (! github.event.pull_request.head.repo.fork) && github.actor != 'dependabot[bot]' }}
     name: Post Workflow Status to Slack
     needs:
       - sbuild
