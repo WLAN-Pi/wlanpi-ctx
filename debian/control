@@ -11,12 +11,12 @@ Build-Depends: debhelper-compat (= 13),
                python3-setuptools,
                python3-venv
 Standards-Version: 4.7.2
-X-Python3-Version: >= 3.9
+X-Python3-Version: >= 3.13
 Homepage: https://github.com/WLAN-Pi/wlanpi-ctx
 
 Package: wlanpi-ctx
 Architecture: any
-Pre-Depends: dpkg (>= 1.16.1), python3 (>=3.9), ${misc:Pre-Depends}
+Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.13), ${misc:Pre-Depends}
 Depends: ${misc:Depends}
 Description: WLAN Pi - Continuous Transmitter (ctx)
  wlanpi-ctx creates a fake AP to continuously transmit random data frame.

@@ -22,7 +22,7 @@ General requirements:
 
 Package requirements:
 
-- Python version 3.9 or higher
+- Python version 3.13 or higher
 - `iw`, `iproute2`, `pciutils`, `usbutils`, `kmod`, `wpa_cli`, and `wpasupplicant` tools installed on the host. most distributions already come with these.
 
 ### WLAN Pi Go
