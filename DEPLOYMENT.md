@@ -104,11 +104,7 @@ Contains changelog information and sets the version of the package
 
 #### control
 
-provides dependencies, package name, and other package meta data.
-
-#### compat
-
-sets compatibility level for debhelper
+provides dependencies, package name, and other package meta data. Build-Depends sets the debhelper compatibility level with `debhelper-compat (= 13)`.
 
 #### rules
 
